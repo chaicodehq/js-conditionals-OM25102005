@@ -26,5 +26,79 @@
  * @returns {string} "weak", "medium", "strong", or "very strong"
  */
 export function checkPasswordStrength(password) {
-  // Your code here
+
+    if (typeof password !== "string") {
+        return "weak";
+    }
+
+    if (password.length === 0) {
+        return "weak";
+    }
+
+    let score = 0;
+
+    if (password.length >= 8) {
+        score++;
+    }
+
+    if (/[A-Z]/.test(password)) {
+        score++;
+    }
+
+    if (/[a-z]/.test(password)) {
+        score++;
+    }
+
+    if (/[0-9]/.test(password)) {
+        score++;
+    }
+
+    if (/[!@#$%^&*()_+\-=\[\]{}|;:,.<>?]/.test(password)) {
+        score++;
+    }
+
+    if (score <= 1) {
+        return "weak";
+    }
+
+    if (score <= 3) {
+        return "medium";
+    }
+
+    if (score === 4) {
+        return "strong";
+    }
+
+    return "very strong";
 }
+// export function checkPasswordStrength(password) {
+//     if (typeof password !== "string" || password.length === 0) {
+//         return "weak";
+//     }
+
+//     const checks = [
+//         password.length >= 8,
+//         /[A-Z]/.test(password),
+//         /[a-z]/.test(password),
+//         /[0-9]/.test(password),
+//         /[!@#$%^&*()_+\-=\[\]{}|;:,.<>?]/.test(password)
+//     ];
+
+//     const score = checks.filter(Boolean).length;
+
+//     switch (score) {
+//         case 5:
+//             return "very strong";
+
+//         case 4:
+//             return "strong";
+
+//         case 2:
+//         case 3:
+//             return "medium";
+
+//         default:
+//             return "weak";
+//     }
+// }
+
